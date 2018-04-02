@@ -115,6 +115,7 @@ class Word2VecCoding:
         print (volcabularyToIdByFreqDesc)
 
 
+
         # transform volcabularyCntPairListAfterFilter into ordered dictionary for lookup
         # vocab_freq_dict => volcabularyToCntByFreqDesc 
         # ? why here need to order, might be aligned with volcabularyToIdByFreqDesc with id
@@ -122,11 +123,21 @@ class Word2VecCoding:
 
         print (volcabularyToCntByFreqDesc)
 
-        return volcabularyToIdByFreqDesc, volcabularyToCntByFreqDesc
-
         trainingFile.close()
         print ('inside function')
 
+        # output volcabulary and id for reference
+        volcabularyToIdFile = None
+        try:
+            volcabularyToIdFile = open("..\\TrainingFiles\\volcabularyToId.txt", 'w',  encoding='utf-8')
+            for volcabulary, id in volcabularyToIdByFreqDesc.items():
+                volcabularyToIdFile.write(volcabulary +"\t" + str(id) + "\n")
+        except:
+            print ("unknown exception, something wrong while output volcabulary and id as pair")
+        finally:
+            volcabularyToIdFile.close()
+
+        return volcabularyToIdByFreqDesc, volcabularyToCntByFreqDesc
 
     # tricky part for hanlding negative sampling
     # ? 0.75 is a magic number
@@ -700,13 +711,13 @@ if __name__ == '__main__':
     ###############################
     # training and store model
     ###############################
-    '''
+    
     volcabularyToIdByFreqDesc, volcabularyToCntByFreqDesc = Word2VecCoding().LearnVocabFromTrainFile()
 
     unigramTable = Word2VecCoding().InitUnigramTable(volcabularyToCntByFreqDesc)
 
     Word2VecCoding().train(volcabularyToIdByFreqDesc, volcabularyToCntByFreqDesc, unigramTable)
-    '''
+    
 
     ###############################
     # training and store model internet
@@ -726,7 +737,7 @@ if __name__ == '__main__':
     # get model and get top closest synonyms
     ###############################
 
-    
+    '''
     # f2 -> trainedModelFile
     trainedModelName = "w2v_model_blog_%s.json" % (Word2VecCoding().ITE-1)
 
@@ -764,7 +775,7 @@ if __name__ == '__main__':
 
 
     Word2VecCoding().getTop(u"山", volcabularyToIdByFreqDesc, w2vModel, idToVolcabularyByFreqDesc)
-
+    '''
 
 
 
