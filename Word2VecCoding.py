@@ -51,7 +51,8 @@ class Word2VecCoding:
         
         # https://docs.python.org/3/howto/unicode.html
         #trainingFile = open("..\\TrainingFiles\\poem_small.txt", encoding='utf-8')
-        trainingFile = open("..\\TrainingFiles\\poem.txt", encoding='utf-8')
+        #trainingFile = open("..\\TrainingFiles\\poem.txt", encoding='utf-8')
+        trainingFile = open("..\\TrainingFiles\\Calendar-Training-All-in-One.Details_20180403_1152_17.tsv_normalization.txt", encoding='utf-8')
         #trainingFile = open("..\\TrainingFiles\\poem.txt")
 
         # using numpy to calculate word cnt 
@@ -75,7 +76,9 @@ class Word2VecCoding:
             line = line.strip().replace('\ufeff', '')
             for word in line.encode('UTF-8').decode('UTF-8').split():
                 #print (word.encode('UTF-8').decode('UTF-8'))
-                volcabularyToCnt.update(word)
+                # to count string instead of character
+                #volcabularyToCnt.update(word)
+                volcabularyToCnt.update({word: 1})
 
         '''
         # this supposes printing chinese but office computer keeps fail
@@ -240,7 +243,10 @@ class Word2VecCoding:
             # repopen the same file again
             #? might be in the future just open one time
             #trainingFile = open("..\\TrainingFiles\\poem_small.txt", encoding='utf-8')
-            trainingFile = open("..\\TrainingFiles\\poem.txt", encoding='utf-8')
+            # trainingFile = open("..\\TrainingFiles\\poem.txt", encoding='utf-8')
+            trainingFile = open("..\\TrainingFiles\\Calendar-Training-All-in-One.Details_20180403_1152_17.tsv_normalization.txt", encoding='utf-8')
+
+
             lineNumber = 0
             try:
                 for line in trainingFile:
