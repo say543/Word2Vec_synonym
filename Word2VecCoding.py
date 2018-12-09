@@ -1,4 +1,7 @@
 
+# link blog
+# http://cpmarkchang.logdown.com/posts/773062-neural-network-word2vec-part-1-overview
+
 # # this is for type chinese in code
 ## -*- coding: utf-8 -*- 
 
